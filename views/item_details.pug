@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+    title #{title}
+
+    h1 #{title}
+
+    div 
+        h3 #{item.name}
+        p #{item.description}
+        p #{item.price}
+        p #{item.number_in_stock}
+
+        hr
+    p 
+        a(href='inventory'+item.url+'/delete')  Delete Item 
+    p 
+        a(href=item.url+'/update')  Update Item        

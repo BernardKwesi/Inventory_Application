@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+    title #{title}
+
+    for item in items
+        p
+            a(href=item.url) #{item.url}

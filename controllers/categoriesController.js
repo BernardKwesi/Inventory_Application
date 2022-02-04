@@ -13,7 +13,7 @@ exports.category_list=function(req,res,next){
    
 }
 exports.category_create_get =function(req,res){
-    res.render('category_form',{title:'Create Category'});
+    res.render('category/category_form',{title:'Create Category'});
 }
 exports.category_create_post =[
 body('name','Category Name is specified').trim().isLength({min:1}).escape(),

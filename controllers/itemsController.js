@@ -1,4 +1,4 @@
-let Items =  require('../models/item');
+let Item =  require('../models/item');
 let Category= require('../models/category');
 let {body,validationResult} =require('express-validator');
 let async = require('async');
