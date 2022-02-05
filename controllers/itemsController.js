@@ -11,7 +11,7 @@ exports.item_create_get =function(req,res){
     },function(err,results){
         if(err) return next(err);
 
-        res.render('item_form',{title:'Create Item',category:results.category});
+        res.render('item_form',{title:'Create Item',categories:results.category});
     })
    
 }
@@ -73,14 +73,14 @@ exports.item_delete_get=function(req,res){
 }
 exports.item_delete_post=function(req,res){
 
-    sync.parallel({
+    async.parallel({
         item:function(callback){
             Item.findById(req.params.id).exec(callback);
         }
     },function(err,results){
         if(err) return next(err)
 
-        Item.findByIdAndUpdate(req.body.item_id,function(err){
+        Item.findByIdAndDelete(req.body.item_id,function(err){
             if(err) return next(err);
 
             res.redirect('/inventory');
@@ -104,7 +104,7 @@ exports.item_update_get = function(req,res){
             err.status =404;
             return next(err);
         }
-        res.render('item_form',{title:'Update Item',category:results.category, item:results.item})
+        res.render('item_form',{title:'Update Item',categories:results.category, item:results.item})
     });
     
     

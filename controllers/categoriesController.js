@@ -32,9 +32,21 @@ function(req,res,next){
         return;
     }
     else{
-        category.save(function (err){
-            res.redirect('/inventory');
-        })
+        Category.findOne({'name' :req.body.name}).exec(function(err,results){
+            if(err) return next(err);
+            if(results ){
+                res,redirect('/inventory');
+                return;
+            }else{
+                category.save(function (err){
+                    if(err) return next(err);
+                    
+                    res.redirect('category.url');
+                });
+            }
+
+        });
+       
     }
 }
 

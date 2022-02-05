@@ -2,8 +2,16 @@ extends layout
 
 block content 
 
-    title #{title}
-
+    h1=title
+    h3=category.name
+    p=category.description
     for item in items
         p
-            a(href=item.url) #{item.url}
+            a(href=item.url) #{item.name}
+
+    hr
+    p 
+     a(href=category.url+'/update') Update Category
+    p 
+     a(href=category.url+'/delete') Delete Category
+     

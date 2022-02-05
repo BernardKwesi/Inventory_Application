@@ -16,7 +16,7 @@ router.get('/category/:id/delete',categoriesController.category_delete_get);
 router.post('/category/:id/delete',categoriesController.category_delete_post);
 
 router.get('/category/:id/update',categoriesController.category_update_get);
-router.post('/category/:id/delete',categoriesController.category_update_post);
+router.post('/category/:id/update',categoriesController.category_update_post);
 
 router.get('/category/:id',categoriesController.category_index);
 

@@ -1,18 +1,19 @@
 extends layout 
 
 block content 
-    title #{title}
+    
 
-    h1 #{title}
+    h1=title
 
     div 
         h3 #{item.name}
         p #{item.description}
         p #{item.price}
         p #{item.number_in_stock}
-
+        p 
+            a(href=item.category.url) #{item.category.name} 
         hr
     p 
-        a(href='inventory'+item.url+'/delete')  Delete Item 
+        a(href=item.url+'/delete')  Delete Item 
     p 
         a(href=item.url+'/update')  Update Item        
