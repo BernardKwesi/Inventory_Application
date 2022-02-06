@@ -13,7 +13,7 @@ exports.category_list=function(req,res,next){
    
 }
 exports.category_create_get =function(req,res){
-    res.render('category/category_form',{title:'Create Category'});
+    res.render('category_form',{title:'Create Category'});
 }
 exports.category_create_post =[
 body('name','Category Name is specified').trim().isLength({min:1}).escape(),
@@ -41,7 +41,7 @@ function(req,res,next){
                 category.save(function (err){
                     if(err) return next(err);
                     
-                    res.redirect('category.url');
+                    res.redirect(category.url);
                 });
             }
 
@@ -59,13 +59,16 @@ exports.category_delete_get = function(req,res){
             Category.findById(req.params.id).exec(callback);
         },
         items:function(callback){
-            Items.find({category:req.params.id}).exec(callback);
+            Items.find({'category':req.params.id}).exec(callback);
         }
     },
     function(err,results){
         if(err) return next(err);
         if(results.category == null){
-            res.redirect('/inventory');
+            var error = new Error('Category Not found');
+            error.status = 404;
+            return next(error);
+           // res.redirect('/inventory');
         }
 
         res.render('category_delete',{title:'Delete Category',category:results.category, items:results.items});
@@ -117,7 +120,7 @@ exports.category_update_get = function(req,res){
     
 
 
-exports.category_update_post = function(req,res){
+exports.category_update_post = [
     body('name','Category Name is specified').trim().isLength({min:1}).escape(),
     body('description','Category Description is specified').trim().isLength({min:1}).escape(),
     
@@ -142,9 +145,9 @@ exports.category_update_post = function(req,res){
         }
     }
       
-}
+]
 
-exports.category_index =function(req,res){
+exports.category_index =function(req,res,next){
     async.parallel({
         category:function(callback){
             Category.findById(req.params.id).exec(callback);
@@ -159,6 +162,7 @@ exports.category_index =function(req,res){
             err.status =404;
             return next(err);
         }
+      
         res.render('category_details',{title:'Category Details',category:results.category, items:results.items});
     })
     

@@ -3,7 +3,7 @@ extends layout
 block content
     h1= title
 
-    form(method='POST' action='')
+    form(method='POST' action='' )
         div.form-group
             label(for='name') Item Name: 
             input#name.form-control(type='text' name='name' placeholder='Item Name' required='true' value=(undefined===item? '' : item.name))
@@ -17,7 +17,8 @@ block content
             select#category.form-select(name="category" value='category')
                 for category in categories
                     if item
-                        option(value=category._id selected=(item.category.name == category.name ? 'selected' :false ))  #{category.name}
+                        -console.log(selected_category)
+                        option(value=category._id selected=( selected_category.toString() == category._id.toString() ? true :false ))  #{category.name}
                     else 
                         option(value=category._id )  #{category.name}
                    
@@ -29,6 +30,7 @@ block content
             label(for='number_in_stock') Number in Stock: 
             input#number_in_stock.form-control(type="number" name="number_in_stock" value=(undefined===item ?'':item.number_in_stock) )         
 
+     
         button#submit.btn.btn-primary(type='submit' ) Submit    
 
     if errors 

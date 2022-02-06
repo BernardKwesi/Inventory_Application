@@ -5,8 +5,9 @@ block content
     h1=title
     h3=category.name
     p=category.description
-    for item in items
-        p
+    if(items)
+        for item in items
+         p
             a(href=item.url) #{item.name}
 
     hr

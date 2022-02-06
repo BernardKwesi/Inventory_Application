@@ -8,15 +8,15 @@ block content
     p Are you sure you want to Delete this category
 
         hr
-        if(items)
-            p Delete the following items before attempting to delete the Category 
+    if items.length > 0
+        p Delete the following items before attempting to delete the Category 
         
             for item in items 
                 p 
                   a(href=item.url) #{item.name}  
                 hr
             
-        else   
-            form(method='POST' action='')
-                input(type='hidden' name='category_id' value=category._id)
-                button.submit.btn.btn-primary(type='submit' ) Delete
+    else   
+        form(method='POST' action='')
+            input(type='hidden' name='category_id' value=category._id)
+            button.submit.btn.btn-primary(type='submit' ) Delete
